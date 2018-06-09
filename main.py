@@ -1,3 +1,5 @@
+
+"""
 user_id = "1234567"
 user_name = "eric_test"
 
@@ -10,6 +12,21 @@ message_record = user_id + ":" + send_message
 #f1.write(user_id + ":" + send_message + '\n')
 f1.writelines(message_record)
 f1.close()
+
+"""
+import json
+
+f2 = open('gossip2.json', 'rt', encoding='utf-8' )
+data2 = json.load(f2)
+print(data2)
+f2.close()
+
+
+
+#設計一組io機制: 每次使用者的訊息或資料進來，
+#1. 重新寫入覆蓋檔案或是 2. 訊息要回傳給後台去擷取，
+#供暫存的檔案名稱就是抓userid來命名
+
 
 
 """
