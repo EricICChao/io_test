@@ -1,41 +1,36 @@
-user_id = "1234567"
-user_name = "eric_test"
-
-#寫入檔案
-
-f1 = open('test.txt', 'at', encoding='utf-8' )
-send_message = input('請輸入:\n')  #輸出的文字需要換行
-#message_record = user_id + ":" + send_message
-message_record = user_id + ":" + send_message
-#f1.write(user_id + ":" + send_message + '\n')
-f1.writelines(message_record)
-f1.close()
+import json, io
 
 
-"""
-#檔案中文字一行一行列出並標示行數
-#a = 0
+#讀取json檔案
+f2 = open('gossip2.json', 'rt', encoding='utf-8' )
+data2 = json.load(f2)
 
-f = open("test.txt", "rt")
-#text_string =str(str(a) + ":" + f.readline())  #確保數字轉字串與串接字串
-f.readlines()
-#a = a+1
-f.close()
-
-print("===============")
-
-#列印出目前檔案中的全部文字
-f = open("test.txt", "rt")
-print(f.read())
-f.close()
-"""
+x = data2.get("issue")
+#取得多層嵌套的json鍵值
+x2 = data2['issue']['author']
+print(data2)
+print(x)
+print(x2)
+f2.close()
 
 
-"""
-#json版本
+#=============================
 
+f3 = open('gossip3.json', 'wt', encoding='utf-8' )
+f4 = open('gossip4.json', 'wt', encoding='utf-8' )
 
+json_obj =[{
+	"issue":
+		{
+			"author": "morning3569", 
+			"title": "[協尋] 1/1台中清水早上八點多車禍", 
+			"date": "2018-01-05 23:27:41"
+        }
+}]
 
-
-#csv版本
-"""
+#用dump和dumps的寫法會讓json格式寫入後直接轉成unicode，必須在後面加上ensure_ascii=False
+data3 = json.dumps(json_obj,ensure_ascii=False)
+data4 = json.dump(json_obj, f4,ensure_ascii=False)
+f3.writelines(data3)
+f3.close()
+f4.close()
